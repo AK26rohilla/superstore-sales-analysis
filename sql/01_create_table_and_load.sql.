@@ -1,0 +1,62 @@
+-- 01_create_table_and_load.sql
+-- Project: Superstore Sales Analysis
+-- What this script does: builds the database and table, loads the CSV, and converts the text dates into real dates.
+-- Before running: change the file path in the LOAD DATA step to where superstore_clean.csv is saved on your computer.
+
+-- Step 1: Allow loading a file from my computer
+SET GLOBAL local_infile = 1;
+
+-- Step 2: Create the database and use it
+CREATE DATABASE IF NOT EXISTS superstore_project;
+USE superstore_project;
+
+-- Step 3: Create the table (drop it first so the script can be run again)
+DROP TABLE IF EXISTS superstore;
+
+CREATE TABLE superstore (
+  row_id INT,
+  order_id VARCHAR(20),
+  order_date VARCHAR(12),
+  ship_date VARCHAR(12),
+  ship_mode VARCHAR(20),
+  customer_id VARCHAR(20),
+  customer_name VARCHAR(60),
+  segment VARCHAR(20),
+  country VARCHAR(30),
+  city VARCHAR(40),
+  state VARCHAR(40),
+  postal_code VARCHAR(10),
+  region VARCHAR(20),
+  product_id VARCHAR(20),
+  category VARCHAR(30),
+  sub_category VARCHAR(30),
+  product_name VARCHAR(150),
+  sales DECIMAL(12,4)
+);
+
+-- Step 4: Load the CSV file
+-- CHARACTER SET latin1 fixes the "Invalid utf8mb4" error for special symbols in product names.
+-- OPTIONALLY ENCLOSED BY '"' keeps commas inside quotes (like "Pencil, #2") in one value.
+-- IGNORE 1 LINES skips the header row.
+LOAD DATA LOCAL INFILE 'C:/Users/ASUS/Downloads/superstore_clean(1).csv'
+INTO TABLE superstore
+CHARACTER SET latin1
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+-- Step 5: Check the load worked
+SELECT COUNT(*) FROM superstore;      -- should be 9800
+SELECT * FROM superstore LIMIT 5;     -- first 5 rows should look correct
+
+-- Step 6: Turn the text dates into real dates
+SET SQL_SAFE_UPDATES = 0;
+
+ALTER TABLE superstore ADD COLUMN order_date_clean DATE, ADD COLUMN ship_date_clean DATE;
+
+UPDATE superstore
+SET order_date_clean = STR_TO_DATE(order_date, '%d-%m-%Y'),
+    ship_date_clean = STR_TO_DATE(ship_date, '%d-%m-%Y');
+
+-- Step 7: Check that no date failed to convert
+SELECT COUNT(*) FROM superstore WHERE order_date_clean IS NULL;   
