@@ -63,7 +63,7 @@ The full log is in [`cleaning_log.md`](cleaning_log.md).
 
 - [x] Business questions defined
 - [x] Data exploration and cleaning
-- [ ] Load data into MySQL
+- [x] Load data into MySQL
 - [ ] SQL analysis
 - [ ] Power BI dashboard
 - [ ] Findings and recommendations
