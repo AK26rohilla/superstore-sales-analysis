@@ -64,13 +64,21 @@ The full log is in [`cleaning_log.md`](cleaning_log.md).
 - [x] Business questions defined
 - [x] Data exploration and cleaning
 - [x] Load data into MySQL
-- [ ] SQL analysis
+- [x] SQL analysis
 - [ ] Power BI dashboard
 - [ ] Findings and recommendations
 
 ## Key findings
 
-*To be added after the analysis is complete.*
+1. Sales grew strongly after a small dip. Sales fell about 4% in 2016 (459,436), then grew about 31% in 2017 (600,193) and about 20% in 2018 (722,052).
+2. Sales are concentrated in a few states. California (446,306) and New York (306,361) together make up about a third of all sales. The weakest states, North Dakota (920), West Virginia (1,210) and Maine (1,271), sell very little.
+3. Large orders drive most of the revenue. Orders of 500 or more are only about 12% of orders but bring about 64% of sales. Small orders (under 50) are about 49% of orders but only about 4% of sales.
+4. West is the top region, Technology is the top category, and Consumer is the top segment. Consumer customers bring in about 51% of sales (1,148,061).
+5. Each category has one clear leader. Chairs lead Furniture (322,823), Storage leads Office Supplies (219,343), and Phones lead Technology (327,782). Phones are the top sub-category in the whole store.
+6. The best-selling products are expensive office equipment. The top product is the Canon imageCLASS 2200 Advanced Copier (about 61,600 in sales), and the top 10 are mostly copiers, binding machines and printers.
+7. Sales swing a lot from month to month. For example, March 2015 sales were about 12 times February's (+1,121%), and sales usually fell back the next month.
+8. Most orders ship in 3 to 5 days. The average is about 4 days. About 60% of orders ship in the normal range, 22% ship fast (0 to 2 days) and 18% ship slowly (6 or more days). Standard Class is used in about 60% of orders.
+9. Almost every customer comes back. 780 of 793 customers (98.4%) placed more than one order, though the data covers four years, so this measure is generous.
 
 ## Recommendations
 
